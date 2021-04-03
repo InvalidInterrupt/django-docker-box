@@ -136,11 +136,14 @@ services:
     - memcached
     - memcached2
   oracle-db:
-    image: sath89/oracle-12c
+    image: oracle-xe:18.4
+    build:
+      context: oracle-dockerfiles/OracleDatabase/SingleInstance/dockerfiles/18.4.0
+      dockerfile: Dockerfile.xe
     volumes:
-    - oracle:/u01/app/oracle/
+    - oracle:/opt/oracle/oradata
     environment:
-    - WEB_CONSOLE=false
+    - ORACLE_PWD=oracle
 
   memcached: &memcached
     image: memcached:alpine

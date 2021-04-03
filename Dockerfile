@@ -12,9 +12,11 @@ RUN apt-get update \
           libenchant1c2a \
           gettext \
           wget \
+          sudo \
     && apt-get clean
 
 RUN groupadd -r test && useradd --no-log-init -r -g test test
+RUN echo "test ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/test_user && chmod 440 /etc/sudoers.d/test_user
 
 RUN wget -q https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O /bin/wait-for-it.sh \
     && chmod a+x /bin/wait-for-it.sh
